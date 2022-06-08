@@ -1,10 +1,16 @@
+import { StartGuardService } from './services/start-guard.service';
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
+    loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
+    canActivate: [StartGuardService]
+  },
+  {
+    path: 'landing',
+    loadChildren: () => import('./landing/landing.module').then( m => m.LandingPageModule),
   }
 ];
 @NgModule({

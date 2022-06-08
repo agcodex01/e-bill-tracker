@@ -1,17 +1,57 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
+    <ion-title> {{ appName }} </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" color="primary">
+  <ion-card>
+    <ion-item>
+      <ion-icon name="card-outline" slot="start"></ion-icon>
+      <ion-label class="bold">Previous Bill</ion-label>
+      <ion-button fill="outline" slot="end" (click)="showDetailPrevReading()">details</ion-button>
+    </ion-item>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-card-content>
+      <h1>₱ {{ prevTotal }}</h1>
+    </ion-card-content>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-icon slot="start" name="calculator-outline"></ion-icon>
+      <ion-label class="bold">Compute Bill</ion-label>
+    </ion-item>
+    <ion-card-content>
+      <form [formGroup]="billForm" (ngSubmit)="addBill()">
+        <ion-item>
+          <ion-label position="stacked" class="bold">Previous Reading</ion-label>
+          <ion-input
+            type="number"
+            placeholder="Enter Input"
+            formControlName="prevReading"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Current Reading</ion-label>
+          <ion-input
+            type="number"
+            placeholder="Enter Input"
+            formControlName="currentReading"
+          ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">KPW</ion-label>
+          <ion-input
+            type="number"
+            placeholder="Enter Input"
+            formControlName="kph"
+          ></ion-input>
+        </ion-item>
+
+        <h1 style="margin: 32px 0px;"> <strong>Total : </strong>   {{ total }}</h1>
+
+        <ion-button [disabled]="!isValid" expand="block" type="submit" fill="outline" slot="end">Save</ion-button>
+      </form>
+    </ion-card-content>
+  </ion-card>
 </ion-content>
